@@ -108,7 +108,7 @@ def tlsa_record_information():
     print("\nTip: Use the '--generate yes' option to generate a full DNS resource record.")
 
 
-def generate_dns_record():
+def generate_dns_record(usage, sel, matchtype, hexdata):
     """Generates a full DNS resource record."""
     print("\nEnter the following information to create a DNS resource record:")
     port = input("Enter port:")
@@ -147,8 +147,8 @@ if __name__ == '__main__':
                         dest="matchtype", default=1,
                         help="The matching type field (0, 1 or 2).")
     parser.add_argument("-g", "--generate",
-                        dest="generate",
-                        help="Yes")
+                        dest="generate", default="no",
+                        help="Get help to generate full record.")
     parser.add_argument('--version', action='version', version='%(prog)s 1.0')
     args = parser.parse_args()
 
@@ -187,4 +187,4 @@ if __name__ == '__main__':
     tlsa_record_information()
 
     if args.generate == "yes":
-        generate_dns_record()
+        generate_dns_record(args.usage, args.selector, args.matchtype, hexdata)
